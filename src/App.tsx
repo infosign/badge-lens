@@ -47,7 +47,7 @@ export default function App() {
           <BadgeIcon />
           <div>
             <h1 className="text-base font-semibold text-gray-900 leading-tight">
-              Open Badges Extractor
+              BadgeLens
             </h1>
             <p className="text-xs text-gray-400">{t('app.subtitle')}</p>
           </div>
