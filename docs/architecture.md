@@ -297,6 +297,29 @@ fetch モック: `vi.stubGlobal('fetch', vi.fn().mockResolvedValue(...))`
 | `v3.validFrom.non_standard` | v3 パース | `validFrom` が null で `awardedDate` が存在する |
 | `v3.achievement.tag_field_name` | v3 パース | `achievement.tags` が null で `achievement.tag` が存在する |
 | `version.unknown` | 統合処理 | バージョン自動判定失敗（v2 フォールバック時） |
+| `url.http_error` | URL ヘルスチェック | HTTP ステータスが 2xx 以外（params: `field`, `url`, `status`） |
+| `url.image_broken` | URL ヘルスチェック | 画像 URL の読み込み失敗（params: `field`, `url`） |
+| `url.network_error` | URL ヘルスチェック | URL に到達不可（params: `field`, `url`） |
+
+---
+
+## 10. URL ヘルスチェック (`src/lib/checkers/url-health.ts`)
+
+リゾルブ完了後、バッジ内の全 HTTP(S) URL にアクセスして到達確認を行う。
+
+**収集対象 URL（v2.0）:**
+- `assertion.id`, `badge`（URL の場合）, `badgeClass.image`, `badgeClass.issuer`（URL の場合）
+- `badgeClass.criteria.id`, `verify.url`, `issuer.image`, `issuer.url`
+
+**収集対象 URL（v3.0）:**
+- `credential.id`, `issuer`（URL の場合）, `issuer.image`, `achievement.image`
+- `credentialSubject.id`（http の場合）, `credentialStatus.id`
+
+**チェック方式:**
+- **画像 URL**（`*.image` フィールド）: `Image` オブジェクトで読み込み確認。CORS 非依存のため HTTP 500 空レスポンスも検出可能。
+- **その他 URL**: `fetch HEAD` + cors モード。CORS エラー時は `fetch GET` + no-cors で再確認してネットワーク障害と切り分け。
+
+**タイムアウト:** 10 秒
 
 ---
 

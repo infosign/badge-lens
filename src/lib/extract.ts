@@ -6,6 +6,7 @@ import { detectVersion, parseJson } from './parsers/detect'
 import { normalizeV2 } from './parsers/v2'
 import { normalizeV3 } from './parsers/v3'
 import { resolveReferences } from './resolver'
+import { checkUrlHealth } from './checkers/url-health'
 
 /**
  * ファイル（PNG / SVG）からバッジメタデータを抽出・正規化・リゾルブする。
@@ -75,5 +76,11 @@ async function normalizeAndResolve(
   badge.warnings.unshift(...extractionWarnings)
 
   // 外部 URL 参照をリゾルブ（失敗しても握り潰す）
-  return resolveReferences(badge)
+  const resolved = await resolveReferences(badge)
+
+  // バッジ内の全 URL の到達確認
+  const urlWarnings = await checkUrlHealth(resolved)
+  resolved.warnings.push(...urlWarnings)
+
+  return resolved
 }

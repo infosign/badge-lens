@@ -90,6 +90,14 @@ const ja = {
     'achievement のフィールド名が "tags" ではなく "tag" です（Open Badges v3.0 仕様では "tags"）。',
   'warning.version.unknown':
     'Open Badges のバージョンを自動判定できませんでした。v2.0 として処理しています。',
+
+  // URL health check warnings
+  'warning.url.http_error':
+    '{{field}} の URL にアクセスしたところ HTTP {{status}} が返されました: {{url}}',
+  'warning.url.image_broken':
+    '{{field}} の画像 URL を読み込めませんでした: {{url}}',
+  'warning.url.network_error':
+    '{{field}} の URL に到達できませんでした（ネットワークエラー）: {{url}}',
 } satisfies Record<string, string>
 
 const en: Record<string, string> = {
@@ -178,6 +186,14 @@ const en: Record<string, string> = {
     'The achievement field is named "tag" instead of "tags" (the Open Badges v3.0 specification uses "tags").',
   'warning.version.unknown':
     'Could not automatically detect the Open Badges version. Processing as v2.0.',
+
+  // URL health check warnings
+  'warning.url.http_error':
+    '{{field}} returned HTTP {{status}}: {{url}}',
+  'warning.url.image_broken':
+    'Image URL for {{field}} failed to load: {{url}}',
+  'warning.url.network_error':
+    '{{field}} is unreachable (network error): {{url}}',
 }
 
 const dict: Record<Locale, Record<string, string>> = { ja, en }

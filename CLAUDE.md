@@ -115,6 +115,16 @@ src/
 | `v3.validFrom.non_standard` | `validFrom` の代わりに `awardedDate` |
 | `v3.achievement.tag_field_name` | `tags` の代わりに `tag`（単数形） |
 | `version.unknown` | バージョン自動判定失敗 |
+| `url.http_error` | URL が HTTP 2xx 以外を返した（params: `field`, `url`, `status`） |
+| `url.image_broken` | 画像 URL の読み込み失敗（params: `field`, `url`） |
+| `url.network_error` | URL に到達不可（params: `field`, `url`） |
+
+### URL ヘルスチェック（`src/lib/checkers/url-health.ts`）
+- リゾルブ完了後、バッジ内の全 HTTP(S) URL を収集して到達確認する
+- **画像 URL**（`*.image` フィールド）: `Image` オブジェクトで確認（CORS 非依存）
+- **その他 URL**: `fetch HEAD` + cors → CORS エラー時は `fetch GET` + no-cors で再確認
+- タイムアウト: 10 秒
+- `ComplianceWarning` として `badge.warnings` に追記（表示はブロックしない）
 
 ### 外部参照リゾルブ
 - v2.0: `badge`（BadgeClass URL）→ fetch → `issuer`（Issuer URL）→ fetch
