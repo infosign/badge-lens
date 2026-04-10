@@ -46,13 +46,27 @@ BadgeLens detects the following specification violations and displays them as wa
 | Testing | Vitest 4 + jsdom |
 | JSON viewer | react-json-view-lite |
 
-## Development
+## Getting Started
+
+**Prerequisites:** Node.js 18 or later
 
 ```bash
+git clone https://github.com/infosign/badge-lens.git
+cd badge-lens
 npm install
-npm run dev          # dev server at http://localhost:5173
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+To stop the dev server, press `Ctrl+C` in the terminal.
+
+## Other commands
+
+```bash
 npm test             # run all tests (90 tests)
 npm run build        # production build
+npm run preview      # preview production build locally
 ```
 
 ## License
@@ -107,13 +121,27 @@ BadgeLens は、Open Badge の画像ファイル（PNG / SVG）またはアサ�
 | テスト | Vitest 4 + jsdom |
 | JSON ビューア | react-json-view-lite |
 
-## 開発
+## 始め方
+
+**必要環境:** Node.js 18 以上
 
 ```bash
+git clone https://github.com/infosign/badge-lens.git
+cd badge-lens
 npm install
-npm run dev          # 開発サーバー起動 (http://localhost:5173)
+npm run dev
+```
+
+ブラウザで [http://localhost:5173](http://localhost:5173) を開いてください。
+
+開発サーバーを停止するにはターミナルで `Ctrl+C` を押してください。
+
+## その他のコマンド
+
+```bash
 npm test             # テスト実行（90 テスト）
 npm run build        # プロダクションビルド
+npm run preview      # ビルド結果をローカルで確認
 ```
 
 ## ライセンス
